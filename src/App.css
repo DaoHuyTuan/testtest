@@ -62,7 +62,7 @@
   justify-content: space-between;
 }
 .btn {
-  width:48%;
+  width:30%;
   color:white;
   border-radius: unset;
   -webkit-border-radius: unset;
@@ -74,18 +74,27 @@
   font-weight: bold;
 }
 .btnSend {
-  background-color:#57dd70;
+  background-color:#67e684;
 }
 .btnSend:hover {
-  background-color: #67e684;
+  background-color: #57dd70;
   color:#ffffff;
 }
 .btnReset {
-  background-color:#ff5a5f;
+  background-color:#ff878b;
 }
 .btnReset:hover {
   color:#ffffff;
-  background-color:#ff878b;
+  background-color:#ff5a5f;
+}
+.btnViewAll {
+  font-size: 16px;
+  background-color:#449af7;
+  color:#ffffff;
+}
+.btnViewAll:hover {
+  color:#ffffff;
+  background-color:#007bff;
 }
 .textArea {
   padding:10px;
@@ -104,6 +113,5 @@
 .input--file {
   border:none;
   background:none;
-  width: 0.1px;
-  height: 0.1px;
+
 }
