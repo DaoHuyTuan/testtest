@@ -7,11 +7,11 @@ import './App.css';
 class App extends Component {
   render() {
     let whichPage;
-    if(this.props.listPages == true) {
+    if(this.props.listPages === true) {
       whichPage = <Main />
       console.log(this.props.listPages)
     } 
-    if(this.props.listPages == false) {
+    if(this.props.listPages === false) {
       console.log(this.props.listPages)
       whichPage = <ListPage />
     }

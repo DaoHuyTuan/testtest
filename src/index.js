@@ -10,11 +10,14 @@ import { Provider } from "react-redux";
 // redux plugin
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import inforReducer from "./redux/reducer/inforReducer";
 
+// reducer 
+import inforReducer from "./redux/reducer/inforReducer";
+import validateReducer from "./redux/reducer/validateReducer";
 import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
-    inforRD:inforReducer
+    inforRD:inforReducer,
+    valiRD:validateReducer
 })
 const store = createStore(rootReducer,applyMiddleware(
     logger,

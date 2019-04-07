@@ -28,7 +28,7 @@
   font-size: 12px;
 }
 .input {
-  width:calc(100% - 33px);
+  width:100%;
   height:45px;
   padding-left:10px;
   border: 2px solid #EBEBEB;
@@ -43,6 +43,7 @@
 }
 .inputName {
   width:100%;
+  text-transform: capitalize;
 }
 .inputPhone {
   border:0px;
