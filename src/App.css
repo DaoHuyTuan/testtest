@@ -3,7 +3,7 @@
   height: 100%;
 }
 .main {
-  width:600px;
+  width:1200px;
   height:740px;
   margin:auto;
   position: absolute;
@@ -14,12 +14,17 @@
   box-shadow:0px 0px 6px 0px #dedede;
   padding:20px;
 }
+
 .row {
   margin-right:unset;
   margin-left:unset;
   margin-bottom:30px;
   display: flex;
   flex-flow: column;
+}
+.rootMain {
+  display: flex;
+  flex-flow: row ;
 }
 .headline {
   margin-bottom: 10px;
@@ -89,7 +94,7 @@
   background-color:#ff5a5f;
 }
 .btnViewAll {
-  font-size: 16px;
+  font-size: 13px;
   background-color:#449af7;
   color:#ffffff;
 }
@@ -114,5 +119,53 @@
 .input--file {
   border:none;
   background:none;
+  width:0.1px;
+  height:0.1px;
+}
+.boxAddImage {
+  width:100px;
+  height:100px;
+  border-width: 2px; 
+  border-style:dashed;
+  border-color: #dddd;
+  background-image: url("./images/plus.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60px 60px;
+  cursor: pointer;
+  transition: 0.5s
+}
+.boxAddImage:hover {
+  background-color: #ddd;
+  opacity: 0.5;
+  transition-property: background-color;
+}
 
+/* list page */
+.listPage {
+  width:100%;
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  grid-template-rows: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  justify-content: center;
+  margin-top: 50px;
+}
+.listItem {
+  display: flex;
+  flex-flow: column;
+  box-shadow: 0px 0px 12px #ddd;
+  padding:20px;
+}
+.listItem-image {
+  width:250px;
+  height:150px;
+}
+.title {
+  font-weight: bold;
+}
+.listItem-des {
+  max-width: 100%;
+  word-wrap:break-word;
 }

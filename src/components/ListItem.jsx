@@ -4,11 +4,24 @@ const ListItem = (props) => {
     console.log(props)
     return (
         <div className="listItem" key = {props.id} >
-            <img src = {props.image} alt=""/>
-            <span>{props.name}</span>
-            <span>{props.phone}</span>
-            <span>{props.des}</span>
-            <span>{props.dob}</span>
+            <img className="listItem-image"src = {props.image} alt=""/>
+            <div>
+                <span className="title">Name: </span>
+                <span>{props.name}</span>
+            </div>
+            <div>
+                <span className="title">Phone Number: </span>
+                <span>{props.phone}</span>
+            </div>
+            <div>
+                <span className="title ">Description: </span>
+                <span className="listItem-des">{props.des}</span>
+            </div>
+            <div>
+                <span className="title">Dob: </span>
+                <span >{props.dob}</span>
+            </div>
+            
         </div>
     )
 }
