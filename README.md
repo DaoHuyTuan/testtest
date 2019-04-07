@@ -13,8 +13,8 @@
 ### Day 8/4/2019
 - [ ] Validate
     + [X] Validate Name (> 3 charactor, No Special charactor, no Number)
-    + [ ] Validate Phone (no a-zA-Z, No special charactor, must have +84)
-    + [ ] Validate Description (not > 100 charactor && not < 10)
+    + [X] Validate Phone (no a-zA-Z, No special charactor, must have +84)
+    + [X] Validate Description (not > 100 charactor && not < 10)
     + [ ] Validate File (must < 2MB && size >= 250x150)
     + [ ] Validate DOB
 - [ ] Optimize layout
