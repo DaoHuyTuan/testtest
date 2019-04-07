@@ -134,6 +134,14 @@ export const valiDes = (param) => {
 
 export const changeFile = (param) => {
     return dispatch => {
+        console.log(param)
+        const newImage = new Image();
+        newImage.src = window.URL.createObjectURL(param);
+        newImage.onload = function () {
+            const imageHeight = newImage.naturalHeight;
+            const imageWidth = newImage.naturalWidth;
+        
+        }
         if(param.size >= 2000000) {
             console.log("can't upload more than 2MB")
         } else {

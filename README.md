@@ -15,7 +15,10 @@
     + [X] Validate Name (> 3 charactor, No Special charactor, no Number)
     + [X] Validate Phone (no a-zA-Z, No special charactor, must have +84)
     + [X] Validate Description (not > 100 charactor && not < 10)
-    + [ ] Validate File (must < 2MB && size >= 250x150)
+    + [X] Update List Page
+    + [X] customize file input
+    + [ ] Date picker
+    + [X] Validate File (must < 2MB && size >= 250x150)
     + [ ] Validate DOB
 - [ ] Optimize layout
 ## Resource

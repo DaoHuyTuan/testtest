@@ -13,7 +13,6 @@ class Main extends React.Component {
     this.refFakeFile = React.createRef();
     this.clearForm = this.clearForm.bind(this);
     this.openFileInput = this.openFileInput.bind(this);
-    this.url = "https://testbadman.herokuapp.com/";
   }
   openFileInput = () => {
     this.refFile.current.click();
