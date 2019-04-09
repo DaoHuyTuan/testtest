@@ -25,9 +25,9 @@
 - [X] Optimize layout
 - [X] Display status validate
 ### Day 10/4/2019
-- [] Clear validate
-- [] Image preview
-- [] button send turn on
+- [ ] Clear validate
+- [ ] Image preview
+- [ ] button send turn on
 ## Resource
 - Server: 
     + **Run on**: https://testbadman.herokuapp.com/ 
