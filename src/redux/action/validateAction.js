@@ -134,7 +134,6 @@ export const valiDes = (param) => {
 
 export const changeFile = (param) => {
     return dispatch => {
-        console.log(param)
         const newImage = new Image();
         newImage.src = window.URL.createObjectURL(param);
         newImage.onload = function () {
@@ -148,7 +147,7 @@ export const changeFile = (param) => {
             let reader = new FileReader();
             reader.readAsDataURL(param);
             reader.onload = (e) => {
-                console.log(reader)
+                // console.log(reader)
                 dispatch({
                     type: VALIDATE_FILE,
                     payload:reader.result
