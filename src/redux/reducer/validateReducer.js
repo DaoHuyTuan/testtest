@@ -6,7 +6,9 @@ import {
     VALIDATE_DES,
     VALIDATE_PHONE,
     VALIDATE_FILE,
-    VALIDATE_DOB
+    VALIDATE_DOB,
+    VALIDATE_FILE_SIZE,
+    VALIDATE_FILE_WEIGHT
 } from "../actiontypes"
 const initState = {
     phone:{
@@ -23,17 +25,21 @@ const initState = {
     },
     isPass: {
        ispass:false,
-       nameState:{
+        nameState:{
            state1:false,
-           state2:false,
            isNamePass:false
-       },
-       phoneState: {
+        },
+        phoneState: {
            state1:false,
            state2:false,
            state3:false,
            isPhonePass:false,
-       }
+        },
+        fileState: {
+            size:false,
+            weight:false,
+            isFilePass:false
+        }
 
 
     }
@@ -44,15 +50,16 @@ const validateReducer = (state = initState, action) => {
     switch(action.type) {
         case TOGGLE_MUST_NUM:
             newState.phone.mustNum = action.payload;
-            newState.isPass.phoneState.state1 = true;
+            newState.isPass.phoneState.state1 = action.payload;
             if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
                 newState.isPass.phoneState.isPhonePass = true;
             }
+            
             return newState
 
         case TOGGLE_LENGTHS:
             newState.phone.lengths = action.payload
-            newState.isPass.phoneState.state2 = true;
+            newState.isPass.phoneState.state2 = action.payload;
             if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
                 newState.isPass.phoneState.isPhonePass = true;
             }
@@ -60,7 +67,7 @@ const validateReducer = (state = initState, action) => {
             
         case TOGGLE_MATCH_VN:
             newState.phone.matchVN = action.payload;
-            newState.isPass.phoneState.state3 = true;
+            newState.isPass.phoneState.state3 = action.payload;
             if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
                 newState.isPass.phoneState.isPhonePass = true;
             }
@@ -68,6 +75,8 @@ const validateReducer = (state = initState, action) => {
 
         case VALIDATE_NAME: 
             newState.inforItem.name = action.payload;
+            newState.isPass.nameState.state1 = action.status;
+            console.log(newState.isPass.nameState.state1)
             return newState;
 
         case VALIDATE_DES: 
@@ -81,10 +90,19 @@ const validateReducer = (state = initState, action) => {
         case VALIDATE_FILE: 
             newState.inforItem.image = action.payload;
             return newState;
+            
+        case VALIDATE_FILE_WEIGHT:
+            newState.isPass.fileState.weight = action.payload;
+            return newState;
+            
+        case VALIDATE_FILE_SIZE:
+            newState.isPass.fileState.size = action.status;
+            return newState;
 
         case VALIDATE_DOB:
             newState.inforItem.dob = action.payload;
             return newState;
+            
         default:
             return newState
     }

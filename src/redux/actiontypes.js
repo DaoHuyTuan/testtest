@@ -10,7 +10,9 @@ export const VALIDATE_NAME = "VALIDATE_NAME";
 export const VALIDATE_DES = "VALIDATE_DES";
 export const VALIDATE_PHONE = "VALIDATE_PHONE";
 export const VALIDATE_FILE = "VALIDATE_FILE";
-export const VALIDATE_DOB = "VALIDATE_DOB"
+export const VALIDATE_DOB = "VALIDATE_DOB";
+export const VALIDATE_FILE_SIZE = "VALIDATE_FILE_SIZE";
+export const VALIDATE_FILE_WEIGHT = "VALIDATE_FILE_WEIGHT"
 // for state of validate phone number
 
 export const TOGGLE_MUST_NUM = "TOGGLE_MUST_NUM";

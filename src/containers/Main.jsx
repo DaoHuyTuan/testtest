@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actionCreator from "../redux/action/inforAction";
 import * as validateCreator from "../redux/action/validateAction";
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -18,37 +19,22 @@ class Main extends React.Component {
     this.state = {
       txtPreviewImage: "Preview Image",
       checkContent: "",
-      imagePreview:"",
+      imagePreview: "",
       check1: {
-        isPass:false,
-        state1:false,
-        state2:false,
-        state3:false,
-      }
+        isPass: false,
+        state1: false,
+        state2: false,
+        state3: false,
+      },
     };
   }
-  static getDerivedStateFromProps(nextProps,prevState) {
-    // console.log(prevProp.isPass)
-    // if(prevProp.isPass != this.props.isPass) {
-    //   console.log("if")
-    //   let check1s = this.state.check1;
-    //   check1s.state1 = this.props.isPass.phoneState.state1;
-    //   check1s.state2 = this.props.isPass.phoneState.state2;
-    //   check1s.state3 = this.props.isPass.phoneState.state3;
-    //     this.setState({
-    //       check1:check1s
-    //     })
-    //     console.log(this.state.check1)
-    //   }
-     console.log(nextProps)
-     return null
-  }
+
   onChangeFile1 = (e) => {
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = (e) => {
       this.setState({
-        imagePreview:reader.result
+        imagePreview: reader.result
       })
     }
 
@@ -70,83 +56,21 @@ class Main extends React.Component {
     this.refDob.current.value = "";
     this.refFile.current.value = "";
   };
+  componentWillReceiveProps(newProps) {
+    console.log(newProps)
+  }
   render() {
     let txtPreview = this.state.txtPreviewImage;
-    let previewImage
-    let checkItem;
-    if(this.state.imagePreview == "") {
+    let previewImage;
+    if (this.state.imagePreview == "") {
       previewImage = <span className="previewImageTXT">{txtPreview}</span>;
     } else {
-      previewImage = <img className="imagePreview"src={this.state.imagePreview} alt=""/> ;
+      previewImage = <img className="imagePreview" src={this.state.imagePreview} alt="" />;
     }
-    if (this.state.checkContent == "name") {
-      checkItem = (
-        <div className="checkList">
-          <div className="checkList-headline">
-            <span className="checkList-headline__title">Name</span>
-            <span className="checkList-headline__content">
-              The name you use to tell us who get problem, and we will support
-              as fast as we can. To help us you should follow these instruction
-              below:
-            </span>
-          </div>
-          <div className="checkList-content">
-            <div className="checkItem">
-              <i className="fas fa-check-circle" />
-              <span>
-                Must a character not have any number or special character
-              </span>
-            </div>
-            <div className="checkItem">
-              <i className="fas fa-check-circle" />
-              <span>Not have any number</span>
-            </div>
-            <div className="checkItem">
-              <i className="fas fa-check-circle" />
-              <span>Not have any special character</span>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    if (this.state.checkContent == "phone") {
-      checkItem = (
-        <div className="checkList">
-          <div className="checkList-headline">
-            <span className="checkList-headline__title">Phone</span>
-            <span className="checkList-headline__content">
-              The Phone help us easy to contact with you, we have a support
-              systems 24/24, and we want make sure your problem must be solve.
-              Just call and let we help
-            </span>
-          </div>
-          <div className="checkList-content">
-            <div className="checkItem">
-              <i className="fas fa-check-circle" />
-              <span>Must contain only number</span>
-            </div>
-            <div className="checkItem">
-              <i className="fas fa-check-circle" />
-              <span>Not have any Special character except "+"</span>
-            </div>
-            <div className="checkItem">
-              <i className="fas fa-check-circle" />
-              <span>Must have +84 at begin</span>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    if(this.state.checkContent == "image") {
-      checkItem = (
-        <div className="checkList">
-          <div className="checkList-content">
-            <div className="previewImage" >{previewImage}</div>
-          </div>
-        </div>
-      )
-    }
-   
+    let newProps = this.props;
+    
+    console.log(this.props.isPass.fileState)
+    console.log(newProps)
     return (
       <div className="container main">
         <div className="rootMain">
@@ -240,7 +164,60 @@ class Main extends React.Component {
             <div className="contentRight pd-40">
               <div className="validateBox">
                 <div className="validateHead"> Validate Information</div>
-                    {checkItem}
+                <div className="checkList">
+                  <div className="checkList-headline">
+                    <span className="checkList-headline__title">Name</span>
+
+                  </div>
+                  <div className="checkList-content">
+                    <div className={this.props.isPass.nameState.state1 ? "checkItem active" : "checkItem"}>
+                      <i className="fas fa-check-circle" />
+                      <span>
+                        Must a character not have any number or special character
+                        </span>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div className="checkList">
+                  <div className="checkList-headline">
+                    <span className="checkList-headline__title">Phone</span>
+                  
+                  </div>
+                  <div className="checkList-content">
+                    <div className={this.props.isPass.phoneState.state1 ? "checkItem active" : "checkItem"}>
+                      <i className="fas fa-check-circle" />
+                      <span>Must contain only number</span>
+                    </div>
+                    <div className={this.props.isPass.phoneState.state2 ? "checkItem active" : "checkItem"}>
+                      <i className="fas fa-check-circle" />
+                      <span>Must have length 12</span>
+                    </div>
+                    <div className={this.props.isPass.phoneState.state3 ? "checkItem active" : "checkItem"}>
+                      <i className="fas fa-check-circle" />
+                      <span>Must have +84 at begin</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="checkList">
+                  <div className="checkList-headline">
+                    <span className="checkList-headline__title">Image</span>
+                    {
+                      console.log(this.props.isPass.fileState.size)
+                    }
+                  </div>
+                  <div className="checkList-content">
+                    <div className={this.props.isPass.fileState.weight ? "checkItem active" : "checkItem"}>
+                      <i className="fas fa-check-circle" />
+                      <span>Must not more than 2MB </span>
+                    </div>
+                    <div className={this.props.isPass.fileState.size ? "checkItem active" : "checkItem"}>
+                      <i className="fas fa-check-circle" />
+                      <span>Must have at least 250x150</span>
+                    </div>
+                   
+                  </div>
+                </div>
               </div>
               <div className="btnGroup">
                 <button
@@ -276,11 +253,10 @@ class Main extends React.Component {
   }
 }
 const mapStateToProps = state => {
-
   return {
     phone: state.valiRD.phone,
     isPass: state.valiRD.isPass,
-    inforItems: state.valiRD.inforItem
+    inforItems: state.valiRD.inforItem,
   };
 };
 const mapDispatchToProps = dispatch => {

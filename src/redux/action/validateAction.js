@@ -6,7 +6,9 @@ import  {
     TOGGLE_MUST_NUM,
     TOGGLE_LENGTHS,
     TOGGLE_MATCH_VN,
-    VALIDATE_DOB
+    VALIDATE_DOB,
+    VALIDATE_FILE_SIZE,
+    VALIDATE_FILE_WEIGHT
 } from "../actiontypes.js"
 // function for Name
 export const changeName = (param) => {
@@ -16,14 +18,20 @@ export const changeName = (param) => {
 }
 export const valiName = (param) => {
     return dispatch => {
-        const testName = /[A-Za-z]/g;
+        const testName = /^[a-zA-Z]+$/;
         const result = testName.test(param)
         if(result === true && param.length >= 3) {
             dispatch({
                 type:VALIDATE_NAME,
-                payload:param
+                payload:param,
+                status:true
             }) 
         } else {
+            dispatch({
+                type:VALIDATE_NAME,
+                payload:param,
+                status:false
+            })
             console.log("loi")
         }
     }
@@ -34,7 +42,6 @@ export const valiName = (param) => {
 export const changePhone = (param,lengths,matchVN,mustNum) => {
     return dispatch => {
         dispatch(valiPhone(param,mustNum));
-        
         dispatch(valiMatchVN(param,lengths,matchVN,mustNum));
         dispatch(sendPhone(param,lengths,matchVN,mustNum))
         dispatch(valiPhoneLength(param,lengths)); 
@@ -134,18 +141,53 @@ export const valiDes = (param) => {
 
 export const changeFile = (param) => {
     return dispatch => {
-        const newImage = new Image();
-        newImage.src = window.URL.createObjectURL(param);
-        newImage.onload = function () {
-            const imageHeight = newImage.naturalHeight;
-            const imageWidth = newImage.naturalWidth;
-        
+        dispatch(valiIMGSize(param))
+    }
+}
+const valiIMGSize = (param) => {
+    let newImage = new Image();
+    newImage.src = window.URL.createObjectURL(param);
+    let statuss;
+    newImage.onload = function () {
+        let imageHeight = newImage.naturalHeight;
+        let imageWidth = newImage.naturalWidth;
+        if(imageHeight > 150 && imageWidth > 250) {
+            statuss = "true";
         }
+        else {
+            statuss = "false";
+        }
+    }
+    return (dispatch,statuss) => {
+        dispatch({
+            type:VALIDATE_FILE_SIZE,
+            status:statuss
+        })
+        dispatch(valiIMGWeight(param))
+    }
+}
+export const valiIMGWeight = (param) => {
+    return dispatch => {
         if(param.size >= 2000000) {
+            dispatch({
+                type:VALIDATE_FILE_WEIGHT,
+                payload:false
+            })
             console.log("can't upload more than 2MB")
         } else {
-            let reader = new FileReader();
-            reader.readAsDataURL(param);
+            dispatch({
+                type:VALIDATE_FILE_WEIGHT,
+                payload:true
+            })
+            
+        } 
+        dispatch(saveFile(param))
+    }
+}
+export const saveFile = (param) => {
+    return dispatch => {
+        let reader = new FileReader();
+        reader.readAsDataURL(param);
             reader.onload = (e) => {
                 // console.log(reader)
                 dispatch({
@@ -154,9 +196,8 @@ export const changeFile = (param) => {
                 })
             }
         }
-       
     }
-}
+    
 export const changeDob = (param) => {
     return dispatch => {
         dispatch({
