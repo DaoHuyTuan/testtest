@@ -4,7 +4,11 @@
 }
 .main {
   width:1200px;
+<<<<<<< HEAD
   height:1100px;
+=======
+  height:1000px;
+>>>>>>> d4802bee20c401f1a611051d10997cc4a835708d
   margin:auto;
   position: absolute;
   top:0px;
