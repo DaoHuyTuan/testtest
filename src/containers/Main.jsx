@@ -222,7 +222,7 @@ class Main extends React.Component {
               <div className="btnGroup">
                 <button
                   className="btn btnSend"
-                  disabled={true}
+                  disabled={false}
                   onClick={() =>
                     this.props.onSendData(
                       this.props.inforItems.name,
