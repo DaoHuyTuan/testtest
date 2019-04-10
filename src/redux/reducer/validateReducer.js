@@ -8,7 +8,8 @@ import {
     VALIDATE_FILE,
     VALIDATE_DOB,
     VALIDATE_FILE_SIZE,
-    VALIDATE_FILE_WEIGHT
+    VALIDATE_FILE_WEIGHT, 
+    IS_PHONE_VALIDATE
 } from "../actiontypes"
 const initState = {
     phone:{
@@ -57,11 +58,15 @@ const validateReducer = (state = initState, action) => {
                         ...state.isPass.phoneState,
                         state1: action.payload
                         }
-                    }
+                },
+                phone: {
+                    ...state.phone,
+                    mustNum: action.payload
                 }
+            }
 
         case TOGGLE_LENGTHS:
-             return {
+            return {
                 ...state,
                 isPass: {
                     ...state.isPass,
@@ -70,6 +75,10 @@ const validateReducer = (state = initState, action) => {
                         state2: action.payload
                     }
                 },
+                phone: {
+                    ...state.phone,
+                    lengths: action.payload
+                }
             }
             
         case TOGGLE_MATCH_VN:
@@ -81,11 +90,16 @@ const validateReducer = (state = initState, action) => {
                         ...state.isPass.phoneState,
                         state3: action.payload
                     }
+                },
+                phone: {
+                    ...state.phone,
+                    matchVN: action.payload
                 }
             }
 
+
         case VALIDATE_NAME: 
-             return {
+              return {
                 ...state,
                 inforItem: {
                     ...state.inforItem,
@@ -95,7 +109,8 @@ const validateReducer = (state = initState, action) => {
                     ...state.isPass,
                     nameState: {
                         ...state.isPass.nameState,
-                        state1: action.status
+                        state1: action.status,
+                        isNamePass:action.status
                     }
                 }
             }
