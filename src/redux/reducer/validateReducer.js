@@ -85,18 +85,33 @@ const validateReducer = (state = initState, action) => {
             }
 
         case VALIDATE_NAME: 
-            newState.inforItem.name = action.payload;
-            newState.isPass.nameState.state1 = action.status;
-            console.log(newState.isPass.nameState.state1)
-            return newState;
+             return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    name: action.payload
+                },
+                isPass: {
+                    ...state.isPass,
+                    nameState: {
+                        ...state.isPass.nameState,
+                        state1: action.status
+                    }
+                }
+            }
 
         case VALIDATE_DES: 
             newState.inforItem.des = action.payload;
             return newState;
 
         case VALIDATE_PHONE: 
-            newState.inforItem.phone = action.payload;
-            return newState;
+            return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    phone: action.payload
+                }
+            }
 
         case VALIDATE_FILE: 
             newState.inforItem.image = action.payload;
