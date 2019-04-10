@@ -8,7 +8,8 @@ import  {
     TOGGLE_MATCH_VN,
     VALIDATE_DOB,
     VALIDATE_FILE_SIZE,
-    VALIDATE_FILE_WEIGHT
+    VALIDATE_FILE_WEIGHT,
+    IS_PHONE_VALIDATE
 } from "../actiontypes.js"
 // function for Name
 export const changeName = (param) => {
@@ -43,18 +44,26 @@ export const changePhone = (param,lengths,matchVN,mustNum) => {
     return dispatch => {
         dispatch(valiPhone(param,mustNum));
         dispatch(valiMatchVN(param,lengths,matchVN,mustNum));
+        dispatch(valiPhoneLength(param,lengths));
         dispatch(sendPhone(param,lengths,matchVN,mustNum))
-        dispatch(valiPhoneLength(param,lengths)); 
+        // dispatch(valiIPhonePass(lengths,matchVN,mustNum));
     }
 }
+
 export const sendPhone = (param,lengths,matchVN,mustNum) => {
     return dispatch => {
-        if(param.length == 12  && matchVN === true && mustNum === true) {
+         
+        if(param.length === 12 && matchVN === true && mustNum === true) {
+            dispatch({
+                type:IS_PHONE_VALIDATE,
+                payload:true,
+            })
+        } else {
             dispatch({
                 type:VALIDATE_PHONE,
-                payload:param
+                payload:param,
             })
-        } 
+        }
     }
 }
 export const valiPhone = (param,mustNum) => {
@@ -96,13 +105,17 @@ export const valiPhoneLength = (param,lengths) => {
                 payload:lengths
             })
         } else {
-
+            lengths = false;
+            dispatch({
+                type:TOGGLE_LENGTHS,
+                payload:lengths,
+            })
             console.log("Không đúng độ dài")
         }
     }
 }
 
-export const valiMatchVN = (param,lengths,matchVN,mustNum) => {
+export const valiMatchVN = (param,matchVN) => {
     return dispatch => {
         if (param.startsWith("+84") && param.lastIndexOf("+") == 0) {
             matchVN = true;
@@ -131,11 +144,21 @@ export const changeDes = (param) => {
 }
 export const valiDes = (param) => {
     return dispatch => {
-        if(param.length > 10 && param.length < 100 )
-        dispatch({
-            type:VALIDATE_DES,
-            payload:param
-        }) 
+        if(param.length > 10 && param.length < 100 ) {
+            console.log(param.length)
+            dispatch({
+                type:VALIDATE_DES,
+                payload:param,
+                status: true
+            }) 
+        } else {
+            dispatch({
+                type:VALIDATE_DES,
+                payload:param,
+                status: false
+            }) 
+        }
+      
     }
 }
 
@@ -145,24 +168,28 @@ export const changeFile = (param) => {
     }
 }
 const valiIMGSize = (param) => {
-    let newImage = new Image();
-    newImage.src = window.URL.createObjectURL(param);
-    let statuss;
-    newImage.onload = function () {
-        let imageHeight = newImage.naturalHeight;
-        let imageWidth = newImage.naturalWidth;
-        if(imageHeight > 150 && imageWidth > 250) {
-            statuss = "true";
+    return dispatch => {
+        let newImage = new Image();
+        newImage.src = window.URL.createObjectURL(param);
+        let statuss;
+        newImage.onload = function () {
+            let imageHeight = newImage.naturalHeight;
+            let imageWidth = newImage.naturalWidth;
+            if(imageHeight > 150 && imageWidth > 250) {
+                statuss = true;
+                dispatch({
+                    type:VALIDATE_FILE_SIZE,
+                    status:statuss
+                })
+            }
+            else {
+                statuss = false;
+                dispatch({
+                    type:VALIDATE_FILE_SIZE,
+                    status:statuss
+                })
+            }
         }
-        else {
-            statuss = "false";
-        }
-    }
-    return (dispatch,statuss) => {
-        dispatch({
-            type:VALIDATE_FILE_SIZE,
-            status:statuss
-        })
         dispatch(valiIMGWeight(param))
     }
 }

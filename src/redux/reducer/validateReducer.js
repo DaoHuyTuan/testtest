@@ -8,7 +8,8 @@ import {
     VALIDATE_FILE,
     VALIDATE_DOB,
     VALIDATE_FILE_SIZE,
-    VALIDATE_FILE_WEIGHT
+    VALIDATE_FILE_WEIGHT,
+    IS_PHONE_VALIDATE
 } from "../actiontypes"
 const initState = {
     phone:{
@@ -39,6 +40,10 @@ const initState = {
             size:false,
             weight:false,
             isFilePass:false
+        },
+        desState: {
+            lengths:false,
+            isDesPass:false
         }
 
 
@@ -48,56 +53,161 @@ const initState = {
 const validateReducer = (state = initState, action) => {
     let newState = {...state};
     switch(action.type) {
+        // case TOGGLE_MUST_NUM:
+        //     newState.phone.mustNum = action.payload;
+        //     newState.isPass.phoneState.state1 = action.payload;
+        //     if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
+        //         newState.isPass.phoneState.isPhonePass = true;
+        //     }
+        //     return newState
         case TOGGLE_MUST_NUM:
-            newState.phone.mustNum = action.payload;
-            newState.isPass.phoneState.state1 = action.payload;
-            if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
-                newState.isPass.phoneState.isPhonePass = true;
+            return {
+                ...state,
+                isPass: {
+                    ...state.isPass,
+                    phoneState: {
+                        ...state.isPass.phoneState,
+                        state1: action.payload
+                        }
+                },
+                phone: {
+                    ...state.phone,
+                    mustNum: action.payload
+                }
             }
-            
-            return newState
 
         case TOGGLE_LENGTHS:
-            newState.phone.lengths = action.payload
-            newState.isPass.phoneState.state2 = action.payload;
-            if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
-                newState.isPass.phoneState.isPhonePass = true;
+            // newState.phone.lengths = action.payload
+            // newState.isPass.phoneState.state2 = action.payload;
+
+            // if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
+            //     newState.isPass.phoneState.isPhonePass = true;
+            // }
+            // return newState;
+            return {
+                ...state,
+                isPass: {
+                    ...state.isPass,
+                    phoneState: {
+                        ...state.isPass.phoneState,
+                        state2: action.payload
+                    }
+                },
+                phone: {
+                    ...state.phone,
+                    lengths: action.payload
+                }
             }
-            return newState;
+            
             
         case TOGGLE_MATCH_VN:
-            newState.phone.matchVN = action.payload;
-            newState.isPass.phoneState.state3 = action.payload;
-            if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
-                newState.isPass.phoneState.isPhonePass = true;
+            // newState.phone.matchVN = action.payload;
+            // newState.isPass.phoneState.state3 = action.payload;
+            // if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
+            //     newState.isPass.phoneState.isPhonePass = true;
+            // }
+            // return newState;
+            return {
+                ...state,
+                isPass: {
+                    ...state.isPass,
+                    phoneState: {
+                        ...state.isPass.phoneState,
+                        state3: action.payload
+                    }
+                },
+                phone: {
+                    ...state.phone,
+                    matchVN: action.payload
+                }
             }
-            return newState;
 
         case VALIDATE_NAME: 
-            newState.inforItem.name = action.payload;
-            newState.isPass.nameState.state1 = action.status;
-            console.log(newState.isPass.nameState.state1)
-            return newState;
+
+            return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    name: action.payload
+                },
+                isPass: {
+                    ...state.isPass,
+                    nameState: {
+                        ...state.isPass.nameState,
+                        state1: action.status,
+                        isNamePass:action.status
+                    }
+                }
+            }
 
         case VALIDATE_DES: 
-            newState.inforItem.des = action.payload;
-            return newState;
+            return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    des: action.payload
+                },
+                isPass: {
+                    ...state.isPass,
+                    desState: {
+                        ...state.isPass.desState,
+                        isDesPass: action.status
+                    }
+                }
+            }
 
         case VALIDATE_PHONE: 
-            newState.inforItem.phone = action.payload;
-            return newState;
-
+            return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    phone: action.payload
+                }
+            }
+        case IS_PHONE_VALIDATE: 
+            return {
+                ...state,
+                isPass: {
+                    ...state.isPass,
+                    phoneState: {
+                        ...state.isPass.phoneState,
+                        isPhonePass: action.payload
+                    }
+                    
+                }
+            }
         case VALIDATE_FILE: 
-            newState.inforItem.image = action.payload;
-            return newState;
+            return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    image: action.payload
+                }
+            }
             
         case VALIDATE_FILE_WEIGHT:
-            newState.isPass.fileState.weight = action.payload;
-            return newState;
+            return {
+                ...state,
+                isPass: {
+                    ...state.isPass,
+                    fileState: {
+                        ...state.isPass.fileState,
+                        weight: action.payload
+                    }
+                }
+            }
             
         case VALIDATE_FILE_SIZE:
-            newState.isPass.fileState.size = action.status;
-            return newState;
+        return {
+            ...state,
+            isPass: {
+                ...state.isPass,
+                fileState: {
+                    ...state.isPass.fileState,
+                    size: action.status
+                }
+            }
+        }
 
         case VALIDATE_DOB:
             newState.inforItem.dob = action.payload;

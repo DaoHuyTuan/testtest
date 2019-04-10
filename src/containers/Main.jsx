@@ -56,9 +56,6 @@ class Main extends React.Component {
     this.refDob.current.value = "";
     this.refFile.current.value = "";
   };
-  componentWillReceiveProps(newProps) {
-    console.log(newProps)
-  }
   render() {
     let txtPreview = this.state.txtPreviewImage;
     let previewImage;
@@ -68,9 +65,11 @@ class Main extends React.Component {
       previewImage = <img className="imagePreview" src={this.state.imagePreview} alt="" />;
     }
     let newProps = this.props;
-    
-    console.log(this.props.isPass.fileState)
-    console.log(newProps)
+    if(this.state.imagePreview == "") {
+      previewImage = <span className="previewImageTXT" >Preview Image</span>
+    }else {
+      previewImage = <img className="imagePreview" src={this.state.imagePreview}></img>
+    }
     return (
       <div className="container main">
         <div className="rootMain">
@@ -128,11 +127,11 @@ class Main extends React.Component {
               <span className="headline">DESCRIPTION</span>
               <textarea
                 ref={this.refDes}
-                rows="4"
+                rows="10"
                 cols="100"
                 required
                 className="textArea"
-                maxLength="100"
+                maxLength="99"
                 minLength="10"
                 placeholder="Type Something"
                 onChange={this.props.onChangeDes}
@@ -202,9 +201,6 @@ class Main extends React.Component {
                 <div className="checkList">
                   <div className="checkList-headline">
                     <span className="checkList-headline__title">Image</span>
-                    {
-                      console.log(this.props.isPass.fileState.size)
-                    }
                   </div>
                   <div className="checkList-content">
                     <div className={this.props.isPass.fileState.weight ? "checkItem active" : "checkItem"}>
@@ -218,11 +214,27 @@ class Main extends React.Component {
                    
                   </div>
                 </div>
+                <div className="checkList">
+                  <div className="checkList-headline">
+                    <span className="checkList-headline__title">Description</span>
+                  </div>
+                  <div className="checkList-content">
+                    <div className={this.props.isPass.desState.isDesPass ? "checkItem active" : "checkItem"}>
+                      <i className="fas fa-check-circle" />
+                      <span>Must not more than 100 character and not litte than 10 character </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="boxImage">
+                    <div className="previewImage">
+                          {previewImage}
+                    </div>
+                </div>
               </div>
               <div className="btnGroup">
                 <button
                   className="btn btnSend"
-                  disabled={true}
+                  disabled={false}
                   onClick={() =>
                     this.props.onSendData(
                       this.props.inforItems.name,
@@ -253,6 +265,7 @@ class Main extends React.Component {
   }
 }
 const mapStateToProps = state => {
+  console.log(state.valiRD.phone)
   return {
     phone: state.valiRD.phone,
     isPass: state.valiRD.isPass,
