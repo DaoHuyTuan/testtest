@@ -1,5 +1,5 @@
 ## Project Progess
-> **Important: The server side live on heroku but because i using free pack so the dyno of the project sometime will sleep [More About this problem](https://devcenter.heroku.com/articles/free-dyno-hours#dyno-sleeping)**
+> **Important: The server side live on heroku but because i using free pack so the dyno of the project sometime will sleep [More About this problem](https://devcenter.heroku.com/articles/free-dyno-hours#dyno-sleeping), so to easy for test you should run the server side first on `https://testbadman.herokuapp.com/`**
 ### The Project Need 
    > Note: You need have these thing before test these project 
    
