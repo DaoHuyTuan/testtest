@@ -64,7 +64,18 @@ const validateReducer = (state = initState, action) => {
                     mustNum: action.payload
                 }
             }
-
+         case IS_PHONE_VALIDATE: 
+            return {
+                ...state,
+                isPass: {
+                    ...state.isPass,
+                    phoneState: {
+                        ...state.isPass.phoneState,
+                        isPhonePass: action.payload
+                    }
+                    
+                }
+            }
         case TOGGLE_LENGTHS:
             return {
                 ...state,
