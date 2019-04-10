@@ -2,21 +2,38 @@ import {
     CLOSE_CALENDAR,
     OPEN_CALENDAR,
     CHOSE_MONTH_CALENDAR,
-    CHOSE_YEAR_CALENDAR
+    CHOSE_YEAR_CALENDAR,
+    GET_MONTH,
+    GET_YEAR,
+    LOAD_CALENDAR,
+    RELOAD_MONTH
 } from "../actiontypes"
 const initState = {
     isOpen:false,
-    year:"YEAR",
-    month:"MONTH",
-    date:"",
-    day:"",
+    year:"2019",
+    month:"2",
+    monthName:"",
+    firstDate:"",
+    days:"",
     isOpenMonth:false,
     isOpenYear:false,
-    numDay:""
+    numDays:""
 }
 
 const calendarReducer = (state = initState,action) => {
     switch(action.type) {
+        case LOAD_CALENDAR:
+            let day = new Date(state.year, state.month, 0).getDate();
+            const stringDate = state.year + "-" + state.month + "-" + 1;
+            const date = new Date(stringDate);
+            const firstdate = date.getDay();
+            return {
+                ...state,
+                month: action.months,
+                monthName: action.payload,
+                numDays: day,
+                firstDate: firstdate
+            }
         case CLOSE_CALENDAR:
             return {
                 ...state,
@@ -29,29 +46,33 @@ const calendarReducer = (state = initState,action) => {
             }
         
         case CHOSE_MONTH_CALENDAR: 
-            if(action.payload == "") {
-                return {
-                    ...state,
-                    isOpenMonth:!state.isOpenMonth
-                }
-            } else {
-                return {
-                    ...state,
-                    isOpenMonth:action.payload
-                }
+            return {
+                ...state,
+                isOpenMonth: !state.isOpenMonth,
+                isOpenYear: false
             }
             
         case CHOSE_YEAR_CALENDAR:
-        if(action.payload == "") {
             return {
                 ...state,
-                isOpenMonth:!state.isOpenYear
+                isOpenYear: !state.isOpenYear,
+                isOpenMonth: false
             }
-        } else {
+        case GET_MONTH:
             return {
                 ...state,
-                isOpenMonth:action.payload
+                month:action.payload,
+                isOpenMonth:false
             }
+        case GET_YEAR:
+            return {
+                ...state,
+                year:action.payload,
+                isOpenYear:false
+            }
+        case RELOAD_MONTH:
+        return {
+            ...state
         }
         default: return state;
     }

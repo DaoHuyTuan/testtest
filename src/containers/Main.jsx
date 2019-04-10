@@ -114,7 +114,7 @@ class Main extends React.Component {
                 required
                 placeholder="dd/mm/yyyy"
                 onChange={this.props.onChangeDob}
-                onClick={this.props.onOpenCalendar}
+                onClick={(nameMonth) => this.props.onOpenCalendar(this.props.calendar.month)}
               />
               {carlendar}
             </div>
@@ -279,7 +279,7 @@ const mapDispatchToProps = dispatch => {
     onChangeFile: e => dispatch(
       validateCreator.changeFile(e.target.files[0])),
     onChangeDob: e => dispatch(validateCreator.changeDob(e.target.value)),
-    onOpenCalendar: () => dispatch(calendarAction.openCalendar())
+    onOpenCalendar: (nameMonth) => dispatch(calendarAction.openCalendar(nameMonth))
   };
 };
 export default connect(

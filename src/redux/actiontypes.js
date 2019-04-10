@@ -26,5 +26,11 @@ export const IS_PHONE_VALIDATE = "IS_PHONE_VALIDATE";
 export const CLOSE_CALENDAR = "CLOSE_CALENDAR";
 export const OPEN_CALENDAR = "OPEN_CALENDAR";
 // event calendar
+export const LOAD_CALENDAR = "LOAD_CALENDAR";
 export const CHOSE_MONTH_CALENDAR = "CHOSE_MONTH_CALENDAR";
 export const CHOSE_YEAR_CALENDAR = "CHOSE_YEAR_CALENDAR";
+export const RELOAD_MONTH = "RELOAD_MONTH"
+// get data for calendar
+export const GET_MONTH = "GET_MONTH";
+export const GET_YEAR = "GET_YEAR";
+    

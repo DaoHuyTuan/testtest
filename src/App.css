@@ -330,8 +330,15 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color:red;
+  border-bottom: 1px solid #dddd;
   font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.select-divMonth:hover, .select-divYear:hover {
+  background-color:#72b4ea;
+  color:#ffffff;
+  transition: 0.5s;
 }
 .itemSelect {
   width: 100%;
@@ -345,4 +352,63 @@
   background-color:#e64d5d;
   color:#ffffff;
   font-weight: bold;
+}
+.groupButton {
+  width: 100%;
+  height: 65px;
+  position: absolute;
+  bottom: 0px;
+  border-top: 1px solid #dddd;
+}
+.btn-cancel-CD {
+  background-color:#e64d5d;
+  border:none;
+  color:#ffffff;
+  padding:10px 25px;
+  font-weight: bold;
+  position: absolute;
+  right:10px;
+  bottom:10px;
+  transition: 0.5s;
+}
+.btn-cancel-CD:hover {
+  background-color:#ff7b89;
+  color:#ffffff;
+  transition: 0.5s;
+}
+.datePicker-content {
+  display: flex;
+  flex-flow: column;
+}
+.nameWeekDate {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+   grid-template-rows: 1fr;
+   grid-row-gap: 10px;
+   padding:10px;
+}
+.dateItem {
+  width:40px;
+  height:40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:1px solid #ddd;
+  justify-self: center;
+  cursor: pointer;
+}
+.titleDay {
+  width: 100%;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 42px 42px 42px 42px 42px 42px 42px;
+  grid-column-gap: 10px;
+  padding: 10px;
+  padding-top: 15px;
+  justify-content: center;
+}
+.titleDay__day {
+  width: 42px;
+  text-align: center;
+  font-weight: lighter;
 }
