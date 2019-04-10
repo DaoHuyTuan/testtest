@@ -8,7 +8,8 @@ import  {
     TOGGLE_MATCH_VN,
     VALIDATE_DOB,
     VALIDATE_FILE_SIZE,
-    VALIDATE_FILE_WEIGHT
+    VALIDATE_FILE_WEIGHT,
+    IS_PHONE_VALIDATE
 } from "../actiontypes.js"
 // function for Name
 export const changeName = (param) => {
@@ -43,18 +44,24 @@ export const changePhone = (param,lengths,matchVN,mustNum) => {
     return dispatch => {
         dispatch(valiPhone(param,mustNum));
         dispatch(valiMatchVN(param,lengths,matchVN,mustNum));
-        dispatch(sendPhone(param,lengths,matchVN,mustNum))
+        
         dispatch(valiPhoneLength(param,lengths)); 
+        dispatch(sendPhone(param,lengths,matchVN,mustNum))
     }
 }
 export const sendPhone = (param,lengths,matchVN,mustNum) => {
     return dispatch => {
-        if(param.length == 12  && matchVN === true && mustNum === true) {
+        if(param.length === 12 && matchVN === true && mustNum === true) {
+            dispatch({
+                type:IS_PHONE_VALIDATE,
+                payload:true,
+            })
+        } else {
             dispatch({
                 type:VALIDATE_PHONE,
-                payload:param
+                payload:param,
             })
-        } 
+        }
     }
 }
 export const valiPhone = (param,mustNum) => {
