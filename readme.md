@@ -25,15 +25,17 @@
     + [X] customize file input
     + [ ] Date picker
     + [X] Validate File (must < 2MB && size >= 250x150)
-    + [ ] Validate DOB
 - [ ] Optimize layout
 ### Day 9/4/2019
 - [X] Optimize layout
 - [X] Display status validate
 ### Day 10/4/2019
-- [ ] Clear validate
+- [X] Clear validate
 - [X] Image preview
-- [X] button send turn on
+
+### Day 11/4/2019
++ [ ] Date picker
+- [ ] button send turn on
 ## Install  
   The project have 2 part 
   - Front End  
