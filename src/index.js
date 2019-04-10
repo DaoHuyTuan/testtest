@@ -14,10 +14,12 @@ import thunk from "redux-thunk";
 // reducer 
 import inforReducer from "./redux/reducer/inforReducer";
 import validateReducer from "./redux/reducer/validateReducer";
+import calendarReducer from "./redux/reducer/calendarReducer"
 import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
     inforRD:inforReducer,
-    valiRD:validateReducer
+    valiRD:validateReducer,
+    calendarRD:calendarReducer
 })
 const store = createStore(rootReducer,applyMiddleware(
     logger,

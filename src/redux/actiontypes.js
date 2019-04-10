@@ -19,3 +19,12 @@ export const TOGGLE_MUST_NUM = "TOGGLE_MUST_NUM";
 export const TOGGLE_LENGTHS = "TOGGLE_LENGTHS";
 export const TOGGLE_MATCH_VN = "TOGGLE_MATCH_VN";
 export const IS_PHONE_VALIDATE = "IS_PHONE_VALIDATE";
+
+
+//calendar 
+
+export const CLOSE_CALENDAR = "CLOSE_CALENDAR";
+export const OPEN_CALENDAR = "OPEN_CALENDAR";
+// event calendar
+export const CHOSE_MONTH_CALENDAR = "CHOSE_MONTH_CALENDAR";
+export const CHOSE_YEAR_CALENDAR = "CHOSE_YEAR_CALENDAR";

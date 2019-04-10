@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actionCreator from "../redux/action/inforAction";
 import * as validateCreator from "../redux/action/validateAction";
+import * as calendarAction from "../redux/action/calendarAction"
+import DatePicker from "./DatePicker";
 
 class Main extends React.Component {
   constructor(props) {
@@ -14,11 +16,9 @@ class Main extends React.Component {
     this.refFakeFile = React.createRef();
     this.clearForm = this.clearForm.bind(this);
     this.openFileInput = this.openFileInput.bind(this);
-    this.changeCheck = this.changeCheck.bind(this);
     this.onChangeFile1 = this.onChangeFile1.bind(this);
     this.state = {
       txtPreviewImage: "Preview Image",
-      checkContent: "",
       imagePreview: "",
       check1: {
         isPass: false,
@@ -40,12 +40,7 @@ class Main extends React.Component {
 
     this.props.onChangeFile(e);
   }
-  changeCheck = e => {
-    let kinds = e.target.getAttribute("kind-input");
-    this.setState({
-      checkContent: kinds
-    });
-  };
+
   openFileInput = (e) => {
     this.refFile.current.click();
   };
@@ -59,17 +54,20 @@ class Main extends React.Component {
   render() {
     let txtPreview = this.state.txtPreviewImage;
     let previewImage;
+    let carlendar;
+  
     if (this.state.imagePreview == "") {
       previewImage = <span className="previewImageTXT">{txtPreview}</span>;
     } else {
       previewImage = <img className="imagePreview" src={this.state.imagePreview} alt="" />;
     }
-    let newProps = this.props;
-    if(this.state.imagePreview == "") {
-      previewImage = <span className="previewImageTXT" >Preview Image</span>
-    }else {
-      previewImage = <img className="imagePreview" src={this.state.imagePreview}></img>
+
+    if(this.props.calendar.isOpen == true) {
+      carlendar = <DatePicker />
+    } else {
+      carlendar = null
     }
+    
     return (
       <div className="container main">
         <div className="rootMain">
@@ -77,8 +75,6 @@ class Main extends React.Component {
             <div className="row">
               <span className="headline">NAME</span>
               <input
-                kind-input="name"
-                onFocus={this.changeCheck}
                 ref={this.refName}
                 className="input inputName"
                 type="text"
@@ -91,8 +87,6 @@ class Main extends React.Component {
               <span className="headline">PHONE NUMBER</span>
               <div className="inputPhone">
                 <input
-                  kind-input="phone"
-                  onFocus={this.changeCheck}
                   ref={this.refPhone}
                   className="input inputPhone"
                   required
@@ -110,18 +104,19 @@ class Main extends React.Component {
                 />
               </div>
             </div>
-            <div className="row">
+            <div className="row position-relative">
               <span className="headline">DAY OF BIRTH</span>
               <input
-                kind-input="dob"
-                onFocus={this.changeCheck}
+
                 ref={this.refDob}
                 type="text"
                 className="input inputDate"
                 required
                 placeholder="dd/mm/yyyy"
                 onChange={this.props.onChangeDob}
+                onClick={this.props.onOpenCalendar}
               />
+              {carlendar}
             </div>
             <div className="row">
               <span className="headline">DESCRIPTION</span>
@@ -143,8 +138,6 @@ class Main extends React.Component {
                   IMAGES
                 </label>
                 <input
-                  kind-input="image"
-                  onClick={this.changeCheck}
                   ref={this.refFile}
                   type="file"
                   className="input--file"
@@ -265,11 +258,11 @@ class Main extends React.Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state.valiRD.phone)
   return {
     phone: state.valiRD.phone,
     isPass: state.valiRD.isPass,
     inforItems: state.valiRD.inforItem,
+    calendar:state.calendarRD
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -285,7 +278,8 @@ const mapDispatchToProps = dispatch => {
     onChangeDes: e => dispatch(validateCreator.changeDes(e.target.value)),
     onChangeFile: e => dispatch(
       validateCreator.changeFile(e.target.files[0])),
-    onChangeDob: e => dispatch(validateCreator.changeDob(e.target.value))
+    onChangeDob: e => dispatch(validateCreator.changeDob(e.target.value)),
+    onOpenCalendar: () => dispatch(calendarAction.openCalendar())
   };
 };
 export default connect(

@@ -4,11 +4,7 @@
 }
 .main {
   width:1200px;
-<<<<<<< HEAD
   height:1100px;
-=======
-  height:1000px;
->>>>>>> d4802bee20c401f1a611051d10997cc4a835708d
   margin:auto;
   position: absolute;
   top:0px;
@@ -277,4 +273,76 @@
 .imagePreview {
   width:100%;
   height:100%;
+}
+/* datePicker */
+
+.datePicker {
+  width: 100%;
+  height: 500px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px #ddd;
+  position: absolute;
+  top: 100px;
+  z-index: 1;
+}
+.fa-times {
+  width:40px;
+  height: 40px;
+  padding: 10px 14px;
+  top:0px;
+  font-size: 18px;
+  right:0px;
+  position: absolute;
+  cursor: pointer;
+}
+.monthSelect {
+  background:none;
+  border:none;
+  padding: 10px;
+}
+.datePicker-head {
+  display: flex;
+  justify-content: space-between
+}
+.divMonth, .divYear {
+  width:40%;
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+
+  justify-content: center;
+  box-shadow: 0px 0px 5px #ddd;
+  text-align: center;
+  top:60px;
+  z-index: 1;
+  background-color: white
+}
+.divMonth {
+  margin-left: 5%;
+}
+.divYear {
+  right: 5%
+}
+.select-divMonth, .select-divYear {
+  width: 50%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color:red;
+  font-weight: bold;
+}
+.itemSelect {
+  width: 100%;
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  padding: 5px;
+  font-weight: bold;
+}
+.itemSelect:hover {
+  background-color:#e64d5d;
+  color:#ffffff;
+  font-weight: bold;
 }

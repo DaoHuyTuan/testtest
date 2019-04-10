@@ -75,19 +75,15 @@ const validateReducer = (state = initState, action) => {
                     mustNum: action.payload
                 }
             }
-         case IS_PHONE_VALIDATE: 
-            return {
-                ...state,
-                isPass: {
-                    ...state.isPass,
-                    phoneState: {
-                        ...state.isPass.phoneState,
-                        isPhonePass: action.payload
-                    }
-                    
-                }
-            }
+
         case TOGGLE_LENGTHS:
+            // newState.phone.lengths = action.payload
+            // newState.isPass.phoneState.state2 = action.payload;
+
+            // if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
+            //     newState.isPass.phoneState.isPhonePass = true;
+            // }
+            // return newState;
             return {
                 ...state,
                 isPass: {
@@ -105,7 +101,12 @@ const validateReducer = (state = initState, action) => {
             
             
         case TOGGLE_MATCH_VN:
-
+            // newState.phone.matchVN = action.payload;
+            // newState.isPass.phoneState.state3 = action.payload;
+            // if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
+            //     newState.isPass.phoneState.isPhonePass = true;
+            // }
+            // return newState;
             return {
                 ...state,
                 isPass: {
