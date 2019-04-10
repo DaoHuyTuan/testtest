@@ -96,7 +96,11 @@ export const valiPhoneLength = (param,lengths) => {
                 payload:lengths
             })
         } else {
-
+            lengths = false;
+            dispatch({
+                type:TOGGLE_LENGTHS,
+                payload:lengths
+            })
             console.log("Không đúng độ dài")
         }
     }
