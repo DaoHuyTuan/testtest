@@ -34,8 +34,12 @@
 - [X] Image preview
 
 ### Day 11/4/2019
-+ [ ] Date picker
-- [ ] button send turn on
++ [X] Date picker
+- [X] button send turn on
+
+
+**FINISH**
+
 ## Install  
   The project have 2 part 
   - Front End  
