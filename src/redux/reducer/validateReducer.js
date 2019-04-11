@@ -44,9 +44,10 @@ const initState = {
         desState: {
             lengths:false,
             isDesPass:false
+        },
+        dobState: {
+            isDobPass:false
         }
-
-
     }
 }
 
@@ -75,19 +76,15 @@ const validateReducer = (state = initState, action) => {
                     mustNum: action.payload
                 }
             }
-         case IS_PHONE_VALIDATE: 
-            return {
-                ...state,
-                isPass: {
-                    ...state.isPass,
-                    phoneState: {
-                        ...state.isPass.phoneState,
-                        isPhonePass: action.payload
-                    }
-                    
-                }
-            }
+
         case TOGGLE_LENGTHS:
+            // newState.phone.lengths = action.payload
+            // newState.isPass.phoneState.state2 = action.payload;
+
+            // if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
+            //     newState.isPass.phoneState.isPhonePass = true;
+            // }
+            // return newState;
             return {
                 ...state,
                 isPass: {
@@ -105,7 +102,12 @@ const validateReducer = (state = initState, action) => {
             
             
         case TOGGLE_MATCH_VN:
-
+            // newState.phone.matchVN = action.payload;
+            // newState.isPass.phoneState.state3 = action.payload;
+            // if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
+            //     newState.isPass.phoneState.isPhonePass = true;
+            // }
+            // return newState;
             return {
                 ...state,
                 isPass: {
@@ -150,7 +152,8 @@ const validateReducer = (state = initState, action) => {
                     ...state.isPass,
                     desState: {
                         ...state.isPass.desState,
-                        isDesPass: action.status
+                        isDesPass: action.status,
+                        lengths:action.status
                     }
                 }
             }
@@ -180,8 +183,16 @@ const validateReducer = (state = initState, action) => {
                 ...state,
                 inforItem: {
                     ...state.inforItem,
-                    image: action.payload
+                    image: action.payload,
+                },
+                isPass: {
+                    ...state.isPass,
+                    fileState: {
+                        ...state.isPass.fileState,
+                        isFilePass:action.isFilepass
+                    }
                 }
+
             }
             
         case VALIDATE_FILE_WEIGHT:
@@ -209,9 +220,21 @@ const validateReducer = (state = initState, action) => {
         }
 
         case VALIDATE_DOB:
-            newState.inforItem.dob = action.payload;
-            return newState;
-            
+            return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    dob: action.payload,
+                    
+                },
+                isPass: {
+                    ...state.isPass,
+                    dobState: {
+                        ...state.isPass.dobState,
+                        isDobPass:true
+                    }
+                }
+            }
         default:
             return newState
     }

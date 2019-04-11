@@ -19,3 +19,21 @@ export const TOGGLE_MUST_NUM = "TOGGLE_MUST_NUM";
 export const TOGGLE_LENGTHS = "TOGGLE_LENGTHS";
 export const TOGGLE_MATCH_VN = "TOGGLE_MATCH_VN";
 export const IS_PHONE_VALIDATE = "IS_PHONE_VALIDATE";
+
+
+//calendar 
+
+export const CLOSE_CALENDAR = "CLOSE_CALENDAR";
+export const OPEN_CALENDAR = "OPEN_CALENDAR";
+// event calendar
+export const LOAD_CALENDAR = "LOAD_CALENDAR";
+export const CHOSE_MONTH_CALENDAR = "CHOSE_MONTH_CALENDAR";
+export const CHOSE_YEAR_CALENDAR = "CHOSE_YEAR_CALENDAR";
+export const RELOAD_MONTH = "RELOAD_MONTH";
+export const RELOAD_YEAR = "RELOAD_YEAR";
+
+// get data for calendar
+export const GET_MONTH = "GET_MONTH";
+export const GET_YEAR = "GET_YEAR";
+export const PICK_DATE = "PICK_DATE"
+    

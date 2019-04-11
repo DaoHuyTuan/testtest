@@ -9,7 +9,6 @@ class App extends Component {
     let whichPage;
     if(this.props.listPages === true) {
       whichPage = <Main />
-
     } 
     if(this.props.listPages === false) {
 
