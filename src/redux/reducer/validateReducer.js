@@ -54,13 +54,7 @@ const initState = {
 const validateReducer = (state = initState, action) => {
     let newState = {...state};
     switch(action.type) {
-        // case TOGGLE_MUST_NUM:
-        //     newState.phone.mustNum = action.payload;
-        //     newState.isPass.phoneState.state1 = action.payload;
-        //     if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
-        //         newState.isPass.phoneState.isPhonePass = true;
-        //     }
-        //     return newState
+
         case TOGGLE_MUST_NUM:
             return {
                 ...state,
@@ -102,12 +96,7 @@ const validateReducer = (state = initState, action) => {
             
             
         case TOGGLE_MATCH_VN:
-            // newState.phone.matchVN = action.payload;
-            // newState.isPass.phoneState.state3 = action.payload;
-            // if(newState.isPass.phoneState.state1 == true && newState.isPass.phoneState.state2 == true && newState.isPass.phoneState.state3 == true) {
-            //     newState.isPass.phoneState.isPhonePass = true;
-            // }
-            // return newState;
+
             return {
                 ...state,
                 isPass: {
