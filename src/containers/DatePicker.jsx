@@ -10,42 +10,29 @@ class DatePicker extends React.Component {
         let yearBox;
         let numDates = this.props.calendar.numDays;
         let arrayDates = [];
-        let blankDay;
-        let startDays = 0;
-        blankDay = this.props.calendar.firstDate -2;
-        if(this.props.calendar.firstDate == 1) {
-            blankDay = this.props.calendar.firstDate;
+        let firstDay;
+        let startDays;
+        firstDay = this.props.calendar.firstDate - 1;
+        if(firstDay < 0) {
+            firstDay = 6;
         }
-        if(this.props.calendar.firstDate < 1) {
-            blankDay = 5;
-        }
-        for(startDays;startDays <= blankDay;startDays++) {
-            if(startDays < blankDay) {
-                // console.log(startDays)
+        if(firstDay == 0) {
+            startDays = 1;
+            console.log(numDates)
+            for(let i = 1;i <= numDates;i++) {
+                arrayDates.push(i);
+            }
+        } else {
+            startDays = 0;
+            for(startDays;startDays < firstDay; startDays++) {
                 arrayDates.push(0);
+                console.log(arrayDates)
             }
-            else {
-                for(var i = 0;i<= numDates ;i++){
-                    // console.log("hello")
-                    arrayDates.push(i);
-                }
+            for(let i = 1;i <= numDates;i++) {
+                arrayDates.push(i);
             }
         }
-
-        // for(let startDay = 0; startDay < numDates; startDay++) {
-            
-        //     if(startDay <= this.props.calendar.firstDate) {
-                
-        //     } else {
-        //         console.log("hello")
-        //         for(let i = 0;i <= numDates; i++) {
-                    
-        //         }
-        //     }
-            
-        // }
-        console.log(arrayDates)
-
+        console.log(firstDay)
         if(this.props.calendar.isOpenMonth == true) {
             monthBox =  (
                 <div className="divMonth" onClick={(e) => this.props.onGetMonth(e)}>
@@ -78,6 +65,7 @@ class DatePicker extends React.Component {
                     <span className="itemSelect">2001</span>
                     <span className="itemSelect">2002</span>
                     <span className="itemSelect">2003</span>
+                    <span className="itemSelect">2019</span>
                 </div>
             ) 
         } else {
@@ -106,7 +94,7 @@ class DatePicker extends React.Component {
                             if(item == 0) {
                                 return <div key={index}></div>;
                             } else {
-                                return <div className="dateItem" key={index}>{item}</div>
+                                return <div className="dateItem" key={index} onClick={() => this.props.onPickDate(item,this.props.calendar.month,this.props.calendar.year)}>{item}</div>
                             }
                         })}
                     </div>
@@ -131,7 +119,7 @@ const mapDispatchToProp = dispatch => {
         onChoseYear: () => dispatch(calendarAction.choseYear()),
         onGetMonth: (e) => dispatch(calendarAction.getMonth(e.target)),
         onGetYear: (e) => dispatch(calendarAction.getYear(e.target.innerHTML)),
-
+        onPickDate: (date,month,year) => dispatch(calendarAction.pickDate(date,month,year))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProp)(DatePicker)

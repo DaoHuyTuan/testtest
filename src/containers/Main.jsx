@@ -67,7 +67,17 @@ class Main extends React.Component {
     } else {
       carlendar = null
     }
-    
+    let isDisable;
+    if(this.props.isPass.desState.isDesPass == true 
+      && this.props.isPass.fileState.isFilePass == true 
+      && this.props.isPass.nameState.isNamePass == true
+      && this.props.isPass.phoneState.isPhonePass == true
+      && this.props.isPass.dobState.isDobPass == true) {
+        isDisable = false
+      }
+      else {
+        isDisable = true
+      }
     return (
       <div className="container main">
         <div className="rootMain">
@@ -111,9 +121,9 @@ class Main extends React.Component {
                 ref={this.refDob}
                 type="text"
                 className="input inputDate"
-                required
+                value={this.props.calendar.date}
                 placeholder="dd/mm/yyyy"
-                onChange={this.props.onChangeDob}
+                onChange={() => this.props.onChangeDob(this.props.calendar.date)}
                 onClick={(nameMonth) => this.props.onOpenCalendar(this.props.calendar.month)}
               />
               {carlendar}
@@ -227,7 +237,7 @@ class Main extends React.Component {
               <div className="btnGroup">
                 <button
                   className="btn btnSend"
-                  disabled={false}
+                  disabled={isDisable}
                   onClick={() =>
                     this.props.onSendData(
                       this.props.inforItems.name,
@@ -278,7 +288,7 @@ const mapDispatchToProps = dispatch => {
     onChangeDes: e => dispatch(validateCreator.changeDes(e.target.value)),
     onChangeFile: e => dispatch(
       validateCreator.changeFile(e.target.files[0])),
-    onChangeDob: e => dispatch(validateCreator.changeDob(e.target.value)),
+    onChangeDob: (date) => dispatch(validateCreator.changeDob(date)),
     onOpenCalendar: (nameMonth) => dispatch(calendarAction.openCalendar(nameMonth))
   };
 };

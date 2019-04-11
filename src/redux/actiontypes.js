@@ -29,8 +29,11 @@ export const OPEN_CALENDAR = "OPEN_CALENDAR";
 export const LOAD_CALENDAR = "LOAD_CALENDAR";
 export const CHOSE_MONTH_CALENDAR = "CHOSE_MONTH_CALENDAR";
 export const CHOSE_YEAR_CALENDAR = "CHOSE_YEAR_CALENDAR";
-export const RELOAD_MONTH = "RELOAD_MONTH"
+export const RELOAD_MONTH = "RELOAD_MONTH";
+export const RELOAD_YEAR = "RELOAD_YEAR";
+
 // get data for calendar
 export const GET_MONTH = "GET_MONTH";
 export const GET_YEAR = "GET_YEAR";
+export const PICK_DATE = "PICK_DATE"
     

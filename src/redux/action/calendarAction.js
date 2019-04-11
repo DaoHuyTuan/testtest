@@ -6,7 +6,11 @@ import {
     GET_MONTH,
     GET_YEAR,
     LOAD_CALENDAR,
-    RELOAD_MONTH
+    RELOAD_MONTH,
+    RELOAD_YEAR,
+    PICK_DATE,
+    VALIDATE_DOB
+
 } from "../actiontypes";
 
 export const openCalendar = (nameMonth) => {
@@ -71,25 +75,42 @@ export const getYear = (year) => {
     }
 }
 export const reLoadMonth = (month) => {
-    console.log(month)
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
+    let numMonth;
     for(let i = 0;i < monthNames.length; i++) {
-        if(month == monthNames[i]) {
-            console.log(i)
+        if(month.innerHTML == monthNames[i]) {
+            numMonth = i
         }
-        
     }
     return dispatch => {
         dispatch({
             type:RELOAD_MONTH,
-            months:month
+            months:numMonth + 1,
+            monthsName: monthNames[numMonth]
         })
         
     }
 }
 export const reLoadYear = (year) => {
-    
-    
+    return dispatch => {
+        dispatch({
+            type:RELOAD_YEAR,
+            years:year,
+        })   
+    } 
+}
+
+export const pickDate = (date,month,year) => {
+    return dispatch => {
+        dispatch({
+            type:PICK_DATE,
+            payload:date + "/" + month + "/" + year
+        })
+        dispatch({
+            type:VALIDATE_DOB,
+            payload:date + "/" + month + "/" + year
+        })
+    }
 }

@@ -219,13 +219,15 @@ export const saveFile = (param) => {
                 // console.log(reader)
                 dispatch({
                     type: VALIDATE_FILE,
-                    payload:reader.result
+                    payload:reader.result,
+                    isFilepass:true
                 })
             }
         }
     }
     
 export const changeDob = (param) => {
+    console.log(param)
     return dispatch => {
         dispatch({
             type:VALIDATE_DOB,

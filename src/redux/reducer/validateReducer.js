@@ -44,9 +44,10 @@ const initState = {
         desState: {
             lengths:false,
             isDesPass:false
+        },
+        dobState: {
+            isDobPass:false
         }
-
-
     }
 }
 
@@ -151,7 +152,8 @@ const validateReducer = (state = initState, action) => {
                     ...state.isPass,
                     desState: {
                         ...state.isPass.desState,
-                        isDesPass: action.status
+                        isDesPass: action.status,
+                        lengths:action.status
                     }
                 }
             }
@@ -181,8 +183,16 @@ const validateReducer = (state = initState, action) => {
                 ...state,
                 inforItem: {
                     ...state.inforItem,
-                    image: action.payload
+                    image: action.payload,
+                },
+                isPass: {
+                    ...state.isPass,
+                    fileState: {
+                        ...state.isPass.fileState,
+                        isFilePass:action.isFilepass
+                    }
                 }
+
             }
             
         case VALIDATE_FILE_WEIGHT:
@@ -210,9 +220,21 @@ const validateReducer = (state = initState, action) => {
         }
 
         case VALIDATE_DOB:
-            newState.inforItem.dob = action.payload;
-            return newState;
-            
+            return {
+                ...state,
+                inforItem: {
+                    ...state.inforItem,
+                    dob: action.payload,
+                    
+                },
+                isPass: {
+                    ...state.isPass,
+                    dobState: {
+                        ...state.isPass.dobState,
+                        isDobPass:true
+                    }
+                }
+            }
         default:
             return newState
     }

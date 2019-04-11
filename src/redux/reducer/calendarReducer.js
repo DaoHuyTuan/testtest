@@ -6,7 +6,9 @@ import {
     GET_MONTH,
     GET_YEAR,
     LOAD_CALENDAR,
-    RELOAD_MONTH
+    RELOAD_MONTH,
+    RELOAD_YEAR,
+    PICK_DATE
 } from "../actiontypes"
 const initState = {
     isOpen:false,
@@ -17,7 +19,8 @@ const initState = {
     days:"",
     isOpenMonth:false,
     isOpenYear:false,
-    numDays:""
+    numDays:"",
+    date:""
 }
 
 const calendarReducer = (state = initState,action) => {
@@ -71,9 +74,36 @@ const calendarReducer = (state = initState,action) => {
                 isOpenYear:false
             }
         case RELOAD_MONTH:
-        return {
-            ...state
-        }
+            let newday = new Date(state.year,action.months, 0).getDate();
+            const newstringDate = state.year + "-" + action.months + "-" + 1;
+            console.log(newstringDate)
+            const newdate = new Date(newstringDate);
+            const newfirstdate = newdate.getDay();
+            return {
+                ...state,
+                month:action.months,
+                monthName:action.monthsName,
+                firstDate:newfirstdate,
+                numDays:newday
+            }
+        case RELOAD_YEAR: 
+            
+            let newday1 = new Date(parseInt(action.years),state.month, 0).getDate();
+            const newstringDate1 = parseInt(action.years) + "-" + state.month + "-" + 1;
+            console.log(newstringDate1)
+            const newdate1 = new Date(newstringDate1);
+            const newfirstdate1 = newdate1.getDay();
+            return {
+                ...state,
+                firstDate:newfirstdate1,
+                numDays:newday1
+            }
+        case PICK_DATE: 
+            return {
+                ...state,
+                date: action.payload + "/" + state.month + "/" + state.year,
+                isOpen:false
+            }
         default: return state;
     }
 }
