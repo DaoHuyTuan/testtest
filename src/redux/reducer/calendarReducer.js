@@ -101,7 +101,7 @@ const calendarReducer = (state = initState,action) => {
         case PICK_DATE: 
             return {
                 ...state,
-                date: action.payload + "/" + state.month + "/" + state.year,
+                date: action.payload,
                 isOpen:false
             }
         default: return state;
