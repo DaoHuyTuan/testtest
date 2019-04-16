@@ -98,6 +98,6 @@
     + **Tech Stack**: NodeJS, Express, PostgreSQL
     + **Github**: https://github.com/DaoHuyTuan/test_server
 - Front End:
-    + **Run Live On**: https://tuantestzalo.firebaseapp.com/
+    + **Run Live On**: https://validateform-1305f.firebaseapp.com/
     + **Tech Stack**: ReactJS, Redux, Bootstrap
     + **Github**: https://github.com/DaoHuyTuan/testtest.git
